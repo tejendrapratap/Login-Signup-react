@@ -1,5 +1,6 @@
 import { useState } from "react";
 import LoginForm from "../components/LoginForm";
+import sign from "../icons/login.svg";
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -11,9 +12,12 @@ const Login = ({ history }) => {
     <>
       <div className="container mt-5">
         <div className="row justify-content-center">
-          <div className="col-sm-4 col-md-3 col-md-4 mt-5 p-4 border border-secondary rounded bcg">
+          <div className="col-md-4 mt-5 p-4 border border-secondary shadow rounded bcg">
             <div className="container-fluid bg-warning p-2 mt-3 text-center fnt">
-              <h3>Log In</h3>
+              <h3>
+                <img src={sign} alt="sign up" />
+                Log In
+              </h3>
             </div>
             <LoginForm
               email={email}
