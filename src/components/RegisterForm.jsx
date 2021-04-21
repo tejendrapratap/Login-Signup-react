@@ -1,3 +1,4 @@
+import { Form, ErrorMessage } from "formik";
 const RegisterForm = ({
   name,
   setName,
@@ -9,7 +10,7 @@ const RegisterForm = ({
   setMobile,
   handleSubmit,
 }) => (
-  <form onSubmit={handleSubmit} className="mt-3">
+  <Form onSubmit={handleSubmit} className="mt-3">
     <div className="form-group mb-3">
       <label className="form-label text-white">Name</label>
       <input
@@ -19,6 +20,7 @@ const RegisterForm = ({
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
+      <ErrorMessage />
     </div>
     <div className="form-group mb-3">
       <label className="form-label text-white">Email address</label>
@@ -50,13 +52,21 @@ const RegisterForm = ({
         onChange={(e) => setPassword(e.target.value)}
       />
     </div>
+    <div className="form-group mb-3">
+      <label className="form-label text-white">Confirm Password</label>
+      <input
+        type="password"
+        className="form-control"
+        placeholder="Re-enter password"
+      />
+    </div>
     <button
       disabled={!name || !email || !mobile || !password}
       className="btn btn-primary mt-4 w-100"
     >
       Submit
     </button>
-  </form>
+  </Form>
 );
 
 export default RegisterForm;

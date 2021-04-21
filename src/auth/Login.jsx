@@ -11,7 +11,7 @@ const Login = ({ history }) => {
     <>
       <div className="container mt-5">
         <div className="row justify-content-center">
-          <div className="col-md-4 mt-5 p-4 border border-secondary rounded bcg">
+          <div className="col-sm-4 col-md-3 col-md-4 mt-5 p-4 border border-secondary rounded bcg">
             <div className="container-fluid bg-warning p-2 mt-3 text-center fnt">
               <h3>Log In</h3>
             </div>
