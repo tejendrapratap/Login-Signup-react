@@ -1,4 +1,3 @@
-import RegisterForm from "../components/RegisterForm";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import sign from "../icons/signup.svg";
