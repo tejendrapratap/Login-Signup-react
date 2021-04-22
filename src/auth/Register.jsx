@@ -2,7 +2,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import sign from "../icons/signup.svg";
 
-const Register = ({ history }) => {
+const Register = () => {
   const mobileRegex = /^[6-9]\d{9}$/;
 
   const validate = Yup.object({

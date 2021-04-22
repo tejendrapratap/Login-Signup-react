@@ -2,7 +2,7 @@ import { Formik, Form } from "formik";
 import log from "../icons/login.svg";
 import * as Yup from "yup";
 
-const Login = ({ history }) => {
+const Login = () => {
   const validate = Yup.object({
     email: Yup.string().email("Email is Invalid").required("Email is Required"),
     password: Yup.string()
