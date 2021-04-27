@@ -10,6 +10,18 @@ const Login = () => {
       .required("Password is Required"),
   });
 
+  const handleLogin = (values, { resetForm }) => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    };
+    fetch("API_END_POINT", requestOptions)
+      .then((response) => response.json())
+      .then(console.log);
+    resetForm();
+  };
+
   return (
     <Formik
       initialValues={{
@@ -17,6 +29,7 @@ const Login = () => {
         password: "",
       }}
       validationSchema={validate}
+      onSubmit={handleLogin}
     >
       {({
         values,
@@ -28,23 +41,26 @@ const Login = () => {
       }) => (
         <div className="container mt-5">
           <div className="row justify-content-center">
-            <div className="col-md-4 mt-5 p-4 border border-secondary shadow rounded bcg">
-              <div className="container-fluid bg-warning p-2 mt-3 text-center fnt">
+            <div className="col-md-4 mt-5 p-4 border border-secondary shadow rounded sign-up-card">
+              <div className="container-fluid p-2 mt-3 text-center anton-font">
                 <h3>
-                  <img src={log} alt="sign up" />
+                  <img src={log} alt="sign up" className="img-user-register" />
                   Log In
                 </h3>
               </div>
               <Form onSubmit={handleSubmit} className="mt-3">
                 <div className="form-group mb-3">
-                  <label className="form-label text-white">Email</label>
+                  <label className="form-label text-white" htmlFor="email">
+                    Email
+                  </label>
                   <input
                     type="email"
                     className={`form-control ${
                       errors.email && touched.email && "is-invalid"
                     }`}
                     name="email"
-                    autoComplete="off"
+                    id="email"
+                    autoComplete="email"
                     placeholder="Enter your email"
                     value={values.email}
                     onChange={handleChange}
@@ -54,31 +70,36 @@ const Login = () => {
                     <div className="error">{errors.email}</div>
                   )}
                 </div>
-                <input
-                  type="password"
-                  className={`form-control ${
-                    errors.password && touched.password && "is-invalid"
-                  }`}
-                  name="password"
-                  autoComplete="off"
-                  placeholder="Enter password"
-                  value={values.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                {errors.password && touched.password && (
-                  <div className="error">{errors.password}</div>
-                )}
+                <div className="form-group mb-3">
+                  <label className="form-label text-white" htmlFor="password">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    className={`form-control ${
+                      errors.password && touched.password && "is-invalid"
+                    }`}
+                    name="password"
+                    id="password"
+                    placeholder="Enter password"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                  {errors.password && touched.password && (
+                    <div className="error">{errors.password}</div>
+                  )}
+                </div>
                 <button
                   disabled={!values.email || !values.password}
-                  className="btn btn-primary mt-4 w-100"
+                  className="btn btn-submit mt-4 w-100"
                 >
-                  Submit
+                  Login
                 </button>
               </Form>
               <div className="container-fluid mt-5 mb-3 text-white">
                 Not Registered?{" "}
-                <a className="btn-color" href="\register">
+                <a className="fancy-colored-text" href="\register">
                   Sign Up
                 </a>
               </div>

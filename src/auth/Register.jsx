@@ -21,6 +21,18 @@ const Register = () => {
       .required("Password Confirmation is Required"),
   });
 
+  const handleSignUp = (values, { resetForm }) => {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    };
+    fetch("API_END_POINT", requestOptions)
+      .then((response) => response.json())
+      .then(console.log);
+    resetForm();
+  };
+
   return (
     <Formik
       initialValues={{
@@ -31,6 +43,7 @@ const Register = () => {
         confirmPassword: "",
       }}
       validationSchema={validate}
+      onSubmit={handleSignUp}
     >
       {({
         values,
@@ -42,19 +55,16 @@ const Register = () => {
       }) => (
         <div className="container">
           <div className="row d-flex justify-content-center">
-            <div className="col-md-4 mt-5 p-4 border border-secondary shadow rounded bcg">
-              <div className="container-fluid bg-warning p-2 text-center fnt">
+            <div className="col-md-4 mt-5 p-4 border border-secondary shadow rounded sign-up-card">
+              <div className="container-fluid p-2 text-center anton-font">
                 <h3>
-                  <img src={sign} alt="sign up" />
+                  <img src={sign} alt="sign up" className="img-user-register" />
                   Register
                 </h3>
               </div>
               <Form onSubmit={handleSubmit} className="mt-3">
                 <div className="form-group mb-3">
-                  <label
-                    htmlFor={values.name}
-                    className="form-label text-white"
-                  >
+                  <label htmlFor="name" className="form-label text-white">
                     Name
                   </label>
                   <input
@@ -63,7 +73,7 @@ const Register = () => {
                       errors.name && touched.name && "is-invalid"
                     }`}
                     name="name"
-                    autoComplete="off"
+                    id="name"
                     placeholder="Enter your name"
                     value={values.name}
                     onChange={handleChange}
@@ -74,10 +84,7 @@ const Register = () => {
                   )}
                 </div>
                 <div className="form-group mb-3">
-                  <label
-                    htmlFor={values.email}
-                    className="form-label text-white"
-                  >
+                  <label htmlFor="email" className="form-label text-white">
                     Email address
                   </label>
                   <input
@@ -86,7 +93,7 @@ const Register = () => {
                       errors.email && touched.email && "is-invalid"
                     }`}
                     name="email"
-                    autoComplete="off"
+                    id="email"
                     placeholder="Enter your email"
                     value={values.email}
                     onChange={handleChange}
@@ -97,10 +104,7 @@ const Register = () => {
                   )}
                 </div>
                 <div className="form-group mb-3">
-                  <label
-                    htmlFor={values.mobile}
-                    className="form-label text-white"
-                  >
+                  <label htmlFor="mobile" className="form-label text-white">
                     Mobile Number
                   </label>
                   <input
@@ -109,7 +113,7 @@ const Register = () => {
                       errors.mobile && touched.mobile && "is-invalid"
                     }`}
                     name="mobile"
-                    autoComplete="off"
+                    id="mobile"
                     placeholder="Enter Mobile Number"
                     value={values.mobile}
                     onChange={handleChange}
@@ -120,10 +124,7 @@ const Register = () => {
                   )}
                 </div>
                 <div className="form-group mb-3">
-                  <label
-                    htmlFor={values.password}
-                    className="form-label text-white"
-                  >
+                  <label htmlFor="password" className="form-label text-white">
                     Password
                   </label>
                   <input
@@ -132,8 +133,9 @@ const Register = () => {
                       errors.password && touched.password && "is-invalid"
                     }`}
                     name="password"
-                    autoComplete="off"
+                    id="password"
                     placeholder="Enter password"
+                    autoComplete="off"
                     value={values.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -144,7 +146,7 @@ const Register = () => {
                 </div>
                 <div className="form-group mb-3">
                   <label
-                    htmlFor={values.confirmPassword}
+                    htmlFor="confirmPassword"
                     className="form-label text-white"
                   >
                     Confirm Password
@@ -157,6 +159,7 @@ const Register = () => {
                       "is-invalid"
                     }`}
                     name="confirmPassword"
+                    id="confirmPassword"
                     autoComplete="off"
                     placeholder="Re-enter password"
                     value={values.confirmPassword}
@@ -175,14 +178,14 @@ const Register = () => {
                     !values.password ||
                     !values.confirmPassword
                   }
-                  className="btn btn-primary mt-4 w-100"
+                  className="btn btn-submit mt-4 w-100"
                 >
-                  Submit
+                  Sign Up
                 </button>
               </Form>
               <div className="container-fluid mt-5 mb-3 text-white">
                 Already a User?{" "}
-                <a className="btn-color" href="\login">
+                <a className="fancy-colored-text" href="\login">
                   Log In
                 </a>
               </div>
